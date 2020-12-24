@@ -1,9 +1,9 @@
 {
-  "name": "angular-material-test",
-  "version": "0.0.0",
+  "name": "material-test",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 5000",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -12,10 +12,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.1",
+    "@angular/cdk": "^11.0.3",
     "@angular/common": "~11.0.1",
     "@angular/compiler": "~11.0.1",
     "@angular/core": "~11.0.1",
     "@angular/forms": "~11.0.1",
+    "@angular/material": "^11.0.3",
     "@angular/platform-browser": "~11.0.1",
     "@angular/platform-browser-dynamic": "~11.0.1",
     "@angular/router": "~11.0.1",
