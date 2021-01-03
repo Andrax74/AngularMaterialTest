@@ -1,17 +1,15 @@
 .flex-container {
   display: flex;
-  //flex-flow: row wrap;
-
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
 
   justify-content: space-around;
 
 }
 
-@media all and (max-width: 800px) {
+@media  (max-width: 300px) {
   .flex-container {
-    justify-content: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -26,4 +24,5 @@
   font-size: 3em;
   text-align: center;
   line-height: 150px;
+
 }
