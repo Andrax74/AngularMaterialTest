@@ -8,7 +8,8 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {path:'demo', loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)},
-  {path:'**', redirectTo: 'demo'}
+  {path:'gestfid', loadChildren: () => import('./gestfid/gestfid.module').then(m => m.GestfidModule)},
+  {path:'**', redirectTo: 'gestfid'}
 ];
 
 @NgModule({
