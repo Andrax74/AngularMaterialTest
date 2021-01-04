@@ -1,6 +1,19 @@
 <mat-drawer-container class="app-sidenav-container">
-  <mat-drawer #drawer mode="push" class="app-sidenav">
-    Drawer content
+  <mat-drawer #drawer
+    [mode]="isScreenSmall ? 'over' : 'side'"
+    [opened]="!isScreenSmall"
+    class="app-sidenav mat-elevation-z10">
+
+    <mat-toolbar color="primary">
+      Clienti
+    </mat-toolbar>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Item 1</mat-list-item>
+      <mat-list-item role="listitem">Item 2</mat-list-item>
+      <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-list>
+
+
   </mat-drawer>
 
   <mat-drawer-content class="app-sidenav-content">
