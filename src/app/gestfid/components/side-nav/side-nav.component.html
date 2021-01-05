@@ -17,10 +17,9 @@
   </mat-drawer>
 
   <mat-drawer-content class="app-sidenav-content">
-    <app-toolbar></app-toolbar>
-    <router-outlet></router-outlet>
-    <button type="button" mat-button (click)="drawer.open()">
-      apri sidenav
-    </button>
+    <app-toolbar (toggleSidenav)="drawer.toggle()"></app-toolbar>
+      <div class="wrapper">
+        <router-outlet></router-outlet>
+      </div>
   </mat-drawer-content>
 </mat-drawer-container>
