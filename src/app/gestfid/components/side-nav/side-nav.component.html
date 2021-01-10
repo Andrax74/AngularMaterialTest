@@ -7,13 +7,13 @@
     <mat-toolbar color="primary">
       Clienti
     </mat-toolbar>
-    <mat-list role="list">
-      <mat-list-item role="listitem">Item 1</mat-list-item>
-      <mat-list-item role="listitem">Item 2</mat-list-item>
-      <mat-list-item role="listitem">Item 3</mat-list-item>
-    </mat-list>
-
-
+    <mat-nav-list>
+      <mat-list-item *ngFor="let cliente of clienti">
+        <a matLine [routerLink]="['/gestfid', cliente.codFid]">
+          <mat-icon svgIcon="{{cliente.idAvatar}}"></mat-icon> {{ cliente.nominativo }}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
 
   <mat-drawer-content class="app-sidenav-content">

@@ -1,4 +1,31 @@
-<mat-card>
-  <h1>Info Cliente</h1>
-</mat-card>
+<div *ngIf="!cliente">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="cliente">
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar svgIcon="{{cliente.idAvatar}}"></mat-icon>
+      <mat-card-title>
+        {{cliente.nominativo}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{cliente.stato}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Il Cliente {{cliente.nominativo}} è residente nel comune di {{cliente.comune}}.
+        Ha maturato/scaricato {{cliente.bollini}} bollini con un totale di {{cliente.spese}} spese.
+        L'ultima spesa è stata eseguita il {{cliente.dataSpesa | date:"dd/MM/yyyy"}}
+      </p>
+    </mat-card-content>
+    <!--
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+    -->
+  </mat-card>
+</div>
 
