@@ -8,7 +8,7 @@
       Clienti
     </mat-toolbar>
     <mat-nav-list>
-      <mat-list-item *ngFor="let cliente of clienti">
+      <mat-list-item *ngFor="let cliente of clienti | async">
         <a matLine [routerLink]="['/gestfid', cliente.codFid]">
           <mat-icon svgIcon="{{cliente.idAvatar}}"></mat-icon> {{ cliente.nominativo }}
         </a>

@@ -17,6 +17,7 @@ export interface IClienti2 {
   bollini: number
   spese: number
   dataSpesa: Date
+  transazioni: Array<ITransazioni>
 }
 
 export interface ITransazioni {
@@ -24,4 +25,13 @@ export interface ITransazioni {
   data: Date
   puntoVendita: string
   bollini: number
+}
+
+export interface IMessage {
+  messaggio: string
+}
+
+export interface IStatoCliente {
+  value: number;
+  viewValue: string;
 }

@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientiService } from '../../services/clienti.service';
 import { IClienti } from '../../Models/interfaces';
 import { MatDrawer } from '@angular/material/sidenav';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 const SMALL_WIDTH_BK = 720;
@@ -17,7 +18,7 @@ export class SideBarComponent implements OnInit {
 
   public isScreenSmall: boolean;
 
-  clienti : IClienti[];
+  clienti : Observable<IClienti[]>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -48,6 +49,11 @@ export class SideBarComponent implements OnInit {
   }
 
   public getClienti() {
+
+    this.clienti = this.clientiService.clienti;
+    this.clientiService.getAll();
+
+    /*
     this.clientiService.getAll().subscribe(
       response => {
         console.log('Ricerchiamo tutti i clienti ');
@@ -61,6 +67,7 @@ export class SideBarComponent implements OnInit {
     error => {
       console.log(error);
     })
+    */
 
   }
 }
