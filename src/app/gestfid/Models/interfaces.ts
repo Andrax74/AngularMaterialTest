@@ -35,3 +35,9 @@ export interface IStatoCliente {
   value: number;
   viewValue: string;
 }
+
+export class BookTrackerError {
+  errorNumber: number;
+  message: string;
+  friendlyMessage: string;
+}

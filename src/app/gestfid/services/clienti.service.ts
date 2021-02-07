@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BookTrackerError, IClienti, IClienti2, IMessage } from '../Models/interfaces';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { IClienti, IClienti2, IMessage } from '../Models/interfaces';
 import { catchError, concatMap, delay, map, retry, retryWhen, take } from 'rxjs/operators'
 
 import { Injectable } from '@angular/core';
@@ -59,7 +59,7 @@ export class ClientiService {
     const Url = `${baseURL}/elimina/${codFid}`;
 
     this.httpClient.delete<IMessage>(Url)
-    .pipe(catchError(this.handleError))
+    .pipe(catchError(err => this.handleError(err)))
     .subscribe(
       response => {
         console.log(response);
@@ -68,6 +68,19 @@ export class ClientiService {
     )
 
   }
+
+  /*
+  private handleHttpError(error: HttpErrorResponse): Observable<BookTrackerError> {
+    console.log(error);
+
+    let dataError = new BookTrackerError();
+    dataError.errorNumber = 100;
+    dataError.message = error.statusText;
+    dataError.friendlyMessage = error.error.messaggio; //'An error occurred retrieving data.';
+
+    return throwError(dataError);
+  }
+  */
 
   handleError(error: HttpErrorResponse) {
 
@@ -100,6 +113,10 @@ export class ClientiService {
       .pipe(
         //retry(3)
         retryWhen(errors => errors.pipe(delay(2000), take(3))),
+        //map(data => data.filter(a => a.comune === 'Alghero')),
+        //map(data => data.filter(a => a.nominativo.includes('ANGELA'))),
+        //map(data => data.filter(a => a.transazioni.length > 5)),
+
         )
       .subscribe(data => {
         this.dataStore.clienti = data;
@@ -117,8 +134,8 @@ export class ClientiService {
 
     const Url = `${baseURL}/cerca/codice/${codfid}`;
 
-    return this.httpClient.get<IClienti>(Url)
-      .pipe(map(data => this.convertDataClienti(data)));
+    return this.httpClient.get<IClienti2>(Url);
+      //.pipe(map(data => this.convertDataClienti(data)));
 
   }
 
@@ -130,6 +147,7 @@ export class ClientiService {
 
   }
 
+  /*
   private convertDataClienti(data: IClienti): IClienti2 {
 
     return {
@@ -147,4 +165,5 @@ export class ClientiService {
     }
 
   }
+  */
 }

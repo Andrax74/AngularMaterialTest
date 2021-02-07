@@ -6,6 +6,7 @@ import { IClienti, IStatoCliente } from '../../Models/interfaces';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-cliente-dialog',
@@ -17,6 +18,7 @@ export class NewClienteDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<NewClienteDialogComponent>,
     private clientiService: ClientiService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   cliente: IClienti = {
@@ -106,24 +108,28 @@ export class NewClienteDialogComponent implements OnInit {
 
   save() {
 
-    this.cliente.codFid = this.codfid.value;
-    this.cliente.nominativo = this.nome.value;
-    this.cliente.stato = this.stato.value;
+    if (this.codfid.hasError('required'))
+    {
+      this.openSnackBar(`Il codice fidelity inserito NON è valido!`, "Errore di Validazione");
+    }
+    else if (this.nome.hasError('maxlength') || this.nome.hasError('minlength') || this.nome.hasError('required'))
+    {
+      this.openSnackBar(`Il nominativo del cliente non è valido!`, "Errore di Validazione")
+    }
+    else
+    {
+      this.cliente.codFid = this.codfid.value;
+      this.cliente.nominativo = this.nome.value;
+      this.cliente.stato = this.stato.value;
 
-    this.dialogRef.close(this.clientiService.insCliente(this.cliente));
+      this.dialogRef.close(this.clientiService.insCliente(this.cliente));
+    }
+  }
 
-    /*
-    this.clientiService.insCliente(this.cliente).subscribe(
-      response => {
-        console.log(response);
-
-        this.dialogRef.close(this.cliente);
-      },
-      error => {
-        console.log(error);
-      }
-    )
-    */
+  openSnackBar(message: string, action: string) : MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
 
 }
