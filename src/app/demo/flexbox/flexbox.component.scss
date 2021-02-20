@@ -1,9 +1,13 @@
 .flex-container {
   display: flex;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   flex-direction: row;
+  border: 1px solid black;
+  height: 200px;
 
+  //align-items: flex-start;
   justify-content: space-around;
+
 
 }
 
@@ -14,15 +18,34 @@
 }
 
 .flex-item {
-  width: 200px;
-  height: 150px;
+  width: 100px;
+  //height: 150px;
   margin-top: 5px;
+  border: 1px solid yellow;
+
+  flex-grow: 1;
+  flex-basis: 0;
 
   background: tomato;
   color: white;
   font-weight: bold;
   font-size: 3em;
   text-align: center;
-  line-height: 150px;
+  //line-height: 150px;
 
+}
+
+.item1 {
+  //align-self: stretch;
+
+}
+
+.item2 {
+  //align-self: flex-end;
+  //flex-grow: 1;
+}
+
+.item3 {
+  //align-self: center;
+  //order: -1
 }
