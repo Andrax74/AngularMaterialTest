@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Aggiungi nuovo cliente</h2>
+
+<mat-dialog-content>
+
+  <div class="example-container">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Avatar</mat-label>
+      <mat-select [(ngModel)] = "cliente.idAvatar">
+        <mat-select-trigger>
+          <mat-icon svgIcon="{{cliente.idAvatar}}"></mat-icon> {{cliente.idAvatar}}
+        </mat-select-trigger>
+        <mat-option *ngFor="let avatar of avatars" [value]="avatar">
+          <mat-icon svgIcon="{{avatar}}"></mat-icon> {{avatar}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Codice Fidelity</mat-label>
+      <input matInput [formControl]="codfid" required  minlength="8" maxlength="8">
+      <mat-error *ngIf="codfid.invalid">{{getErrMsgCodFid()}}</mat-error>
+      <mat-error *ngIf="codfid.hasError('invalidAsync')">{{getErrMsgCodFidExists()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nominativo</mat-label>
+      <input matInput [formControl]="nome" required minlength="6" maxlength="50" >
+      <mat-error *ngIf="nome.invalid">{{getErrMsgNominativo()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Comune</mat-label>
+      <input matInput [(ngModel)] = "cliente.comune" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Stato Cliente</mat-label>
+      <mat-select [formControl]="stato">
+          <mat-option *ngFor="let stato of statoCliente" [value]="stato.value">
+            {{stato.viewValue}}
+          </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="primary" (click)="save()">
+    <mat-icon>save</mat-icon> Salva
+  </button>
+  <button mat-button color="primary" (click)="dismiss()">
+    <mat-icon>cancel</mat-icon> Annulla
+  </button>
+</mat-dialog-actions>
